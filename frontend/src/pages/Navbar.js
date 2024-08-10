@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { IconButton, InputBase, Badge } from '@mui/material';
 import { Search, Notifications, AccountCircle } from '@mui/icons-material';
 
 function Navbar() {
     const [scrollY, setScrollY] = useState(0);
-    const [hidden, setHidden] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [hidden, setHidden] = useState(true); // Initially hidden
+    const threshold = 100; // Threshold distance to reveal navbar when scrolling up
 
     useEffect(() => {
         const handleScroll = () => {
             setScrollY(window.scrollY);
-            setHidden(window.scrollY > scrollY);
+
+            if (window.scrollY > threshold) {
+                if (window.scrollY > lastScrollY) {
+                    // Scrolling down
+                    setHidden(true);
+                } else {
+                    // Scrolling up
+                    setHidden(false);
+                }
+            } else {
+                // If above the threshold, keep navbar hidden
+                setHidden(true);
+            }
+
+            setLastScrollY(window.scrollY);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -18,21 +33,22 @@ function Navbar() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [scrollY]);
+    }, [lastScrollY, scrollY]);
 
     const navbarStyle = {
         display: hidden ? 'none' : 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '10px 30px',
-        backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background
-        boxShadow: 'none', // Remove box shadow for transparency
+        backgroundColor: 'rgba(255, 255, 255, 0.8)', // Slightly opaque background
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Optional: Add box shadow
         borderRadius: "0", // Remove border radius if needed
         margin: '0px -20px',
         position: 'fixed', // Make navbar fixed
         top: 0, // Stick to the top
         width: '100%', // Full width
         zIndex: 10, // Ensure it is above the image and other content
+        transition: 'all 0.3s ease-in-out', // Smooth transition
     };
 
     const navbarContentStyle = {
@@ -59,7 +75,7 @@ function Navbar() {
 
     return (
         <nav style={navbarStyle}>
-            <h1 style={{ color: '#fff' }}>Crop Wise</h1>
+            <h1 style={{ color: '#000' }}>Crop Wise</h1>
             <div style={navbarContentStyle}>
                 <div style={navbarActionsStyle}>
                     <div style={searchBarStyle}>
@@ -73,11 +89,11 @@ function Navbar() {
                     </div>
                     <IconButton size="large">
                         <Badge badgeContent={4} color="error">
-                            <Notifications style={{ color: 'white' }} />
+                            <Notifications style={{ color: '#000' }} />
                         </Badge>
                     </IconButton>
                     <IconButton size="large">
-                        <AccountCircle style={{ color: 'white' }} />
+                        <AccountCircle style={{ color: '#000' }} />
                     </IconButton>
                 </div>
             </div>

@@ -5,6 +5,8 @@ import { IconButton, Box, Typography, Card, CardMedia, CardContent, Divider, Tex
 import { styled } from '@mui/system';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import Marquee from './Marquee';
+import BlogSection from './Blogs';
+import Footer from './Footer';
 
 // Styles for the carousel
 const CarouselContainer = styled(Box)(({ theme }) => ({
@@ -187,6 +189,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
     },
 }));
 
+
 const FormTitle = styled(Typography)(({ theme }) => ({
     textAlign: 'center',
     marginBottom: '30px',
@@ -365,6 +368,10 @@ const Dashboard = () => {
                 </FormContainer>
             </Box>
             <Marquee />
+            <BlogSection />
+            <Marquee />
+            <Footer />
+
         </div>
     );
 };
