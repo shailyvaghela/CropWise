@@ -2,13 +2,51 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: #F5F5DC; /* Beige background, reminiscent of fertile soil */
 }
 
-h4 {
-  color: #1976d2;
+.MuiAppBar-root {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: #4CAF50; /* Earthy green for navbar */
 }
 
-p {
-  color: #555;
+.MuiButton-root {
+  text-transform: none;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.MuiInputBase-root {
+  background-color: #fff;
+  border-radius: 4px;
+  padding-left: 8px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.MuiTypography-root {
+  font-family: 'Merriweather', serif; /* More formal and traditional serif font for headings */
+}
+
+@media (max-width: 600px) {
+  .MuiAppBar-root {
+    justify-content: center;
+  }
+
+  .MuiToolbar-root {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .MuiButton-root {
+    display: none;
+  }
+
+  .MuiIconButton-root {
+    margin-right: 8px;
+  }
+
+  .MuiPaper-root {
+    width: 100%;
+  }
 }
